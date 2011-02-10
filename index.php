@@ -29,15 +29,12 @@ if($_POST){
 	<!-- Date: 2011-02-10 -->
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
 	<script type="text/javascript">
-		JQuery.fn.center = function () {
-					    this.css("position","absolute");
-					    this.css("top", ( $(window).height() - this.height() ) / 2+$(window).scrollTop() + "px");
-					    this.css("left", ( $(window).width() - this.width() ) / 2+$(window).scrollLeft() + "px");
-					    return this;
-					}
-		$(document).ready(function(){
-			$("#container").center();
-		});
+		$.fn.center = function () {
+			this.css("position","absolute");
+			this.css("top", ( $(window).height() - this.height() ) / 2+$(window).scrollTop() + "px");
+			this.css("left", ( $(window).width() - this.width() ) / 2+$(window).scrollLeft() + "px");
+			return this;
+		}
 	</script>
 	<style type="text/css">
 	body, html {
@@ -49,16 +46,27 @@ if($_POST){
 	}
 	#container {
 		width: 600px;
-		margin: 0 auto;
 	}
 	input {
 		font-size: 40px;
 		text-align: center;
 	}
+	header{
+		text-align: left;
+		font-size: 50px;
+		color: #fff291;
+	}
+	.goog {
+		position:absolute;
+		right:0;
+		top:0;
+	}
 	</style>
 </head>
 <body>
+	<img src="google_logo.png" class="goog">
 	<div id="container">
+		<header>Google URL Shortener</header>
 	<form id="shorten" method="post">
 		<input type="hidden" value="shorten" name="action">
 		<input type="text" value="<?php echo $expanded; ?>" name="to_shorten">
@@ -78,6 +86,11 @@ if($_POST){
 		echo $expanded;
 	}
 	?>
+	<script type="text/javascript">
+		$("#container").center();
+		$(".goog").css('top', $("#container").offset().top+($("#container").height()/1.9));
+		$(".goog").css('left', $("#container").offset().left-15);
+	</script>
 	</div>
 </body>
 </html>
